@@ -27,6 +27,7 @@ namespace project_hd.Controllers
 
 		public IActionResult Index()
 		{
+			ViewBag.data = this.ReadFromDB();
 			return View();
 		}
 
@@ -35,40 +36,45 @@ namespace project_hd.Controllers
 			return View();
 		}
 
-		public IActionResult InsertObject()
+		//[HttpGet("Home/ReadApi/{currency}")]
+		public IActionResult InsertApi()
 		{
-			var obj = new { Name = "Konrad", Surname = "Flaka" };
+			WebClient client = new WebClient();
+			var obj = client.DownloadString("https://api.coindesk.com/v1/bpi/currentprice/btc.json");
 			var mongo = new MongoClient();
 			IMongoDatabase db = mongo.GetDatabase("test");
-			IMongoCollection<Object> collection = db.GetCollection<Object>("currency");
-			collection.InsertOne(obj);
+			IMongoCollection<Object> collection = db.GetCollection<Object>("data");
+			dynamic objToSave = new { data = obj };
+			collection.InsertOne(objToSave);
+			return Ok(obj);
+		}
+
+		public IActionResult ClearDB()
+		{
+			var mongo = new MongoClient();
+			IMongoDatabase db = mongo.GetDatabase("test");
+			IMongoCollection<Object> collection = db.GetCollection<Object>("data");
+			collection.DeleteMany(obj => true);
 			return Ok();
+		}
+
+		private dynamic ReadFromDB()
+		{
+			var mongo = new MongoClient();
+			IMongoDatabase db = mongo.GetDatabase("test");
+			IMongoCollection<Object> collection = db.GetCollection<Object>("data");
+			dynamic obj = collection.Find(new BsonDocument()).ToList();
+			return obj;
 		}
 
 		public IActionResult ReadObject()
 		{
-			var mongo = new MongoClient();
-			IMongoDatabase db = mongo.GetDatabase("test");
-			IMongoCollection<Object> collection = db.GetCollection<Object>("currency");
-			var obj = collection.Find(new BsonDocument());
-			var result = obj.ToEnumerable();
-			return Ok(result);
-		}
-
-		[HttpGet("Home/ReadApi/{currency}")]
-		public IActionResult ReadApi([FromRoute]string currency)
-		{
-			WebClient client = new WebClient();
-			var obj = client.DownloadString("https://api.coindesk.com/v1/bpi/currentprice/" + currency + ".json");
+			dynamic obj = this.ReadFromDB();
 			return Ok(obj);
 		}
 
-		public IActionResult ReadBtc()
-		{
-			WebClient client = new WebClient();
-			var obj = client.DownloadString("https://api.coindesk.com/v1/bpi/currentprice/" + "btc" + ".json");
-			return Ok(obj);
-		}
+
+
 
 
 		[HttpGet]
@@ -78,11 +84,7 @@ namespace project_hd.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Get()
-		{
-			var obj = new { Name = "Konrad", Surname = "Flaka" };
-			return Ok(obj);
-		}
+
 
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

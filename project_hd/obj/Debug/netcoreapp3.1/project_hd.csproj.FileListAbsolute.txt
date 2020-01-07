@@ -34,9 +34,10 @@ D:\Asus\projects\project_hd\project_hd\bin\Debug\netcoreapp3.1\MongoDB.Driver.dl
 D:\Asus\projects\project_hd\project_hd\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
 D:\Asus\projects\project_hd\project_hd\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
 D:\Asus\projects\project_hd\project_hd\bin\Debug\netcoreapp3.1\SharpCompress.dll
-D:\Asus\projects\project_hd\project_hd\obj\Debug\netcoreapp3.1\project_hd.MvcApplicationPartsAssemblyInfo.cache
 D:\Asus\projects\project_hd\project_hd\obj\Debug\netcoreapp3.1\project_hd.Views.pdb
 D:\Asus\projects\project_hd\project_hd\obj\Debug\netcoreapp3.1\project_hd.csproj.CopyComplete
 D:\Asus\projects\project_hd\project_hd\obj\Debug\netcoreapp3.1\project_hd.dll
 D:\Asus\projects\project_hd\project_hd\obj\Debug\netcoreapp3.1\project_hd.pdb
 D:\Asus\projects\project_hd\project_hd\bin\Debug\netcoreapp3.1\web.config
+D:\Asus\projects\project_hd\project_hd\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Asus\projects\project_hd\project_hd\obj\Debug\netcoreapp3.1\project_hd.MvcApplicationPartsAssemblyInfo.cache
