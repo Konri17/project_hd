@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<project_hd.Models.Currency>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 <script type="text/javascript">
@@ -24,21 +26,24 @@
     </div>
     <div role="group">
         <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Waluta 1</th>
-                    <th scope="col">Waluta 2</th>
-                    <th scope="col">Waluta 3</th>
-                    <th scope="col">Waluta 4</th>
-                </tr>
-            </thead>
-                <tbody>
-                <tr>
-                    <td>test1</td>
-                    <td>test2</td>
-                    <td>test3</td>
-                    <td>test4</td>
-                </tr>
+            @* <thead> *@
+            @*     <tr> *@
+            @*         <th scope="col">Waluta 1</th> *@
+            @*         <th scope="col">Waluta 2</th> *@
+            @*         <th scope="col">Waluta 3</th> *@
+            @*         <th scope="col">Waluta 4</th> *@
+            @*     </tr> *@
+            @* </thead> *@
+            <tbody>
+                @foreach (var item in ViewBag.data)
+                {
+                    <tr>
+                        <td>@Json.Serialize(item)</td>
+                        @* <td>test2</td> *@
+                        @* <td>test3</td> *@
+                        @* <td>test4</td> *@
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
